@@ -14,10 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from pybo import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pybo/', views.index),     #도메인 주소 뒤에 pybo/가 붙으면 views.index 실행
+    path('pybo/', include('pybo.urls')),     
+    #pybo/ 로 시작되는 페이지 요청은 모두 pybo/urls.py에 있는 URL 매핑을 참고하여 처리
+    #즉, 앞으로 모든 URL 요청은 urls.py에서 관리
 ]
