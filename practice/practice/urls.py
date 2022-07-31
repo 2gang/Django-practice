@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from pybo import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('pybo/', views.index),     #도메인 주소 뒤에 pybo/가 붙으면 views.index 실행
 ]
