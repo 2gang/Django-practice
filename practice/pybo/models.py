@@ -5,6 +5,9 @@ class Question(models.Model):   #질문 모델
     content = models.TextField()    #질문 내용, 글자수 제한 없는 데이터
     create_date = models.DateTimeField() #질문 날짜
     
+    def __str__(self):
+        return self.subject #데이터 조회시 id가 아닌 제목을 표시
+    
     
 class Answer(models.Model):   #답변 모델
     question = models.ForeignKey(Question, on_delete=models.CASCADE) 
