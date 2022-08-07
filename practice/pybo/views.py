@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Question
+from django.utils import timezone
 
 
 #페이지 요청에 대한 응답을 할 때 사용하는 장고 클래스
@@ -13,3 +14,9 @@ def detail(request, question_id):   #Question 상세 내용을 확인하는 클�
     question = get_object_or_404(Question, pk=question_id)  #존재하지 않는 페이지에 접속하면 404오류가 뜨도록 함
     context = {'question' : question}   #question 모델 데이터 저장
     return render(request, 'pybo/question_detail.html', context)
+
+def answer_create(request, question_id):    #답변 클래스, request에는 detail.html의 textarea 부분이 넘어온다.
+    question = get_object_or_404(Question, pk=question_id)
+    question.answer_set.create(content=request.POST.get('content'), create_date=timezone.now()) #넘어온 값을 추출하는 코드가 request.POST.get('content') 이다.
+    # Question 모델을 통해 Answer 모델 데이터를 생성하기 위해 answer_set.create를 사용했다.
+    return redirect('pybo:detail', question_id=question.id) #답변 등록 후 페이지 이동
