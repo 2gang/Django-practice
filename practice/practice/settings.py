@@ -55,7 +55,7 @@ ROOT_URLCONF = 'practice.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/ 'templates'],    #템플릿 디렉터리 위치 등록
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
